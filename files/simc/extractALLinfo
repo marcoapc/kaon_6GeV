@@ -1,0 +1,1 @@
+for i in $(ls *.hist); do ./Info.csh $i; done

@@ -1,0 +1,49 @@
+### Rosenbluth2015_006 ###
+Commented the following two lines of Jacobian correction, since they don't exist in the pion file. The factor 1./(2.*pkcm*qstar) is on the order of 3.d-7.
+       jacobian = jacobian/(2.*pkcm*qstar)
+       jac_old = jac_old/(2.*pkcm*qstar)
+Also, changed the cross section to:
+        sigA  = 1.2/(1.0+0.53*q2_gev)
+        sigLT = 0.3927480*exp(-2.1*(t-2.0))*(1.0/(q2_gev+0.785)**2)*
+     >        (1.0/(sqrt(w2_gev)*(w2_gev-0.93827**2)))*(2.0+eps)/3.0
+        sigTT = 0.45764808*1.0*exp(-2.1*(t-2.0))*(1.0/(q2_gev+0.785)**2)*
+     >        (1.0/(sqrt(w2_gev)*(w2_gev-0.93827**2)))*(2.0+eps)/3.0
+
+### Rosenbluth2015_004 ###
+Same as Rosenbluth2015_001, but changed the data. Now t is calculated correctly in the engine.
+
+### Rosenbluth2015_003_ptheta1411 ###
+- Again, no change done in simc kaon physics model. Run done to investigate the t distribution shift between SIMC and experiments.
+- Increased the angle of the HMS (hadron) from 13.61 to 14.11.
+- The SIMC t distribution changed indeed, but not enough to explain the differences between simulation and experiment.
+
+### Rosenbluth2015_002_ptheta1311 ###
+- No change done in simc kaon physics model. Run done to investigate the t distribution shift between SIMC and experiments.
+- Reduced the angle of the HMS (hadron) from 13.61 to 13.11.
+
+### Rosenbluth2015_001 ###
+- Model corrected from results of the first iteration, using just a global scale in sigA, sigLT, and sigTT.
+MlookSIMC(2):
+** FOLDER: t<0.4 (t>0.2 && t<0.4)**
+- Mean(Q2) = 1.97608
+- Mean(W) = 2.36073
+- Mean(t) = 0.373643
+- Mean(eps)=0.534674
+** FOLDER: t>0.4 && t<0.45
+- Mean(Q2) = 2.07978
+- Mean(W) = 2.33818
+- Mean(t) = 0.424137
+- Mean(eps)=0.532554
+** FOLDER: t>0.45 && t<0.8
+- Mean(Q2) = 2.15716
+- Mean(W) = 2.32397
+- Mean(t) = 0.475408
+- Mean(eps)=0.528998
+
+### Rosenbluth2015_000 ###
+- First implementation of the Rosenbluth form to the kaon cross section.
+- The L/T are not separated, and contains only one form taken from Tanja2012 paper: sigA = 1200/(1+0.53*Q2)
+- LT and TT parts were not found in any model, so I assumed to be equal and with the form proposed by Huber as factorized2007
+- tmin is still to be calculated in the cross section
+- A Rosenbluth-like form was fit to data SIGexp=((Yexp/Ysimc)*SIGsimc), bin-by-bin in phi, for Q2=2.05, eps=0.53, and full t: [0]+[1]*cos(phi)+[2]*cos(2phi)
+- The fitted parameters were used to correct the simc model for the next iteration.
